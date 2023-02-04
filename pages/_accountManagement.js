@@ -7,7 +7,7 @@ const Account = ({ session }) => {
     const [website, setWebsite] = useState(null)
     const [avatar_url, setAvatarUrl] = useState(null)
     const [error, setError] = useState(null)
-    const user = getUser()
+    // const user = getUser()
     // const { data: { user } } = supabase.auth.getUser()
     
     useEffect(() => {

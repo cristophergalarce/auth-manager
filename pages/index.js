@@ -3,7 +3,7 @@ import Head from 'next/head'
 // import { Inter } from '@next/font/google'
 // import styles from '@/styles/Home.module.css'
 import Account from './_accountManagement'
-import { Login } from './login'
+import Login from './login'
 import { supabase } from '../supabase/supabaseClient'
 import { useState, useEffect } from "react"
 
