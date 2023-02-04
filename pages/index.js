@@ -1,49 +1,52 @@
 import Head from 'next/head'
+// import { useState, useEffect } from "react"
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+// import { supabase } from '../supabase/supabaseClient'
+import Login from './login'
+import Account from './accountManagement'
 // import Image from 'next/image'
 // import { Inter } from '@next/font/google'
 // import styles from '@/styles/Home.module.css'
-import Login from './login'
-import { supabase } from '../supabase/supabaseClient'
-import { useState, useEffect } from "react"
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [session, setSession] = useState(null)
+  // const [isLoading, setIsLoading] = useState(true)
+  const session = useSession()
+  const supabase = useSupabaseClient()
 
-  useEffect(() => {
-    let mounted = true
+  // useEffect(() => {
+  //   let mounted = true
 
-    async function getInitialSession() {
-      const {
-        data: { session }
-      } = await supabase.auth.getSession()
+  //   async function getInitialSession() {
+  //     const {
+  //       data: { session }
+  //     } = await supabase.auth.getSession()
 
-      if (mounted) {
-        if (session) {
-          setSession(session)
-        }
+  //     if (mounted) {
+  //       if (session) {
+  //         setSession(session)
+  //       }
 
-        setIsLoading(false)
-      }
-    }
+  //       setIsLoading(false)
+  //     }
+  //   }
 
-    getInitialSession()
+  //   getInitialSession()
 
-    const { subscription } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session)
-      }
-    )
+  //   const { subscription } = supabase.auth.onAuthStateChange(
+  //     (_event, session) => {
+  //       setSession(session)
+  //     }
+  //   )
 
-    return () => {
-      mounted = false
+  //   return () => {
+  //     mounted = false
 
-      subscription?.unsubscribe()
-    }
-  }, []
-  )
+  //     subscription?.unsubscribe()
+  //   }
+  // }, []
+  // )
 
   return (
     <>
@@ -54,11 +57,15 @@ export default function Home() {
         <link rel="icon" href="/main.svg" />
         <link rel="mask-icon" href="/main.svg" />
       </Head>
+
       <div className="container" style={{ padding: '50px 0 100px 0' }}>
         {!session ? (
           <Login />
         ) : (
-          <Account key={session.user.id} session={session} />
+          <Account session={session} />
+          // <div>
+          //   Account
+          // </div>
         )}
       </div>
       {/* <main className={styles.main}>

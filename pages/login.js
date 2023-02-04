@@ -1,26 +1,34 @@
 import { useState } from "react"
 import { supabase } from '../supabase/supabaseClient'
+// import Link from "next/link"
+import IconHide from "../public/img/icons/hide.svg"
+import IconShow from "../public/img/icons/show.svg"
 
 const Login = () => {
-    const [loading, setLoading] = useState(false)
+    const [showPass, setShowPass] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const handleLogin = async (email) => {
-        // e.preventDefault()
-        try {
-            setLoading(true)
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password
-            })
-            if (error) throw error
-        } catch (error) {
-            alert('No pudimos iniciar tu sesión. Inténtalo nuevamente.')
-            console.log( error.error_description || error.message )
-        } finally {
-            setLoading(false)
-        }
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        await supabase.auth.signInWithPassword({
+            email,
+            password
+        })
+        // try {
+        //     setLoading(true)
+        //     const { data, error } = await supabase.auth.signInWithPassword({
+        //         email,
+        //         password
+        //     })
+        //     if (error) throw error
+        // } catch (error) {
+        //     alert('No pudimos iniciar tu sesión. Inténtalo nuevamente.')
+        //     console.log( error.error_description || error.message )
+        // } finally {
+        //     setLoading(false)
+        // }
     }
 
     return (
@@ -37,22 +45,40 @@ const Login = () => {
                 placeholder="Ejemplo, ppotts@stark.com"
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="pass">Contraseña</label>
-            <input
-                className="inputField"
-                name="pass"
-                type="password"
-                value={password}
-                placeholder="Ingresa tu constraseña"
-                onChange={(e) => setPassword(e.target.value)}
-            />
+            <label
+                htmlFor="pass"
+            >
+                Contraseña
+            </label>
+            <div
+                className="input-password"
+            >
+                <input
+                    className="inputField"
+                    name="pass"
+                    type={showPass ? "text" : "password"}
+                    value={password}
+                    placeholder="Ingresa tu constraseña"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <figure
+                    onClick={() => setShowPass(!showPass)}
+                >
+                    {showPass ? <IconHide /> : <IconShow />}
+                </figure>
+            </div>
+            {/* <Link
+                href={"/accountManagement"}
+            > */}
             <button
                 className="button primary block"
                 type="submit"
-                disabled={loading}
+                // disabled={loading}
             >
-                {loading ? 'Loading ...' : 'Ingresar'}
+                {/* {loading ? 'Loading ...' : 'Ingresar'} */}
+                Iniciar sesión
             </button>
+            {/* </Link> */}
         </form>
     )
 }
