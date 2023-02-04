@@ -1,25 +1,32 @@
 import { useState } from "react"
 import { supabase } from '../supabase/supabaseClient'
+import IconHide from "../public/img/icons/hide.svg"
+import IconShow from "../public/img/icons/show.svg"
 
 const Signup = () => {
-    const [loading, setLoading] = useState(true)
+    const [showPass, setShowPass] = useState(false)
+    // const [loading, setLoading] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
+    // const [error, setError] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try {
-            setLoading(true)
+        await supabase.auth.signUp({
+            email,
+            password
+        })
+        //     try {
+        //         setLoading(true)
 
-            await supabase.auth.signUp({
-                email,
-                password
-            })
-        } catch (err) {
-            setError(err.message)
-        }
-        
+        //         await supabase.auth.signUp({
+        //             email,
+        //             password
+        //         })
+        //     } catch (err) {
+        //         setError(err.message)
+        //     }
+
     }
 
     return (
@@ -27,7 +34,11 @@ const Signup = () => {
             className="form-widget"
             onSubmit={handleSubmit}
         >
-            <label htmlFor="email">Email</label>
+            <label
+                htmlFor="email"
+            >
+                Email
+            </label>
             <input
                 className="inputField"
                 name="email"
@@ -36,23 +47,37 @@ const Signup = () => {
                 placeholder="Ejemplo, ppotts@stark.com"
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="pass">Crea una contraseña</label>
-            <input
-                className="inputField"
-                name="pass"
-                type="password"
-                value={password}
-                placeholder="Crea una constraseña para tu cuenta"
-                onChange={(e) => setPassword(e.target.value)}
-            />
+            <label
+                htmlFor="pass"
+            >
+                Crea una contraseña
+            </label>
+            <div
+                className="input-password"
+            >
+                <input
+                    className="inputField"
+                    name="pass"
+                    type={showPass ? "text" : "password"}
+                    value={password}
+                    placeholder="Crea una constraseña para tu cuenta"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <figure
+                    onClick={() => setShowPass(!showPass)}
+                >
+                    {showPass ? <IconHide /> : <IconShow />}
+                </figure>
+            </div>
             <button
                 className="button primary block"
                 type="submit"
-                disabled={loading}
+            // disabled={loading}
             >
-                {loading ? 'Crear cuenta' : 'Loading ...'}
+                {/* {loading ? 'Crear cuenta' : 'Loading ...'} */}
+                Crear cuenta
             </button>
-            {error && <p>{error}</p>}
+            {/* {hintError && <p>{hintError}</p>} */}
         </form>
     )
 }

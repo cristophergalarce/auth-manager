@@ -105,3 +105,19 @@ a {
     color-scheme: dark;
   }
 }
+
+.input-password {
+  position: relative;
+}
+
+.input-password figure {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  cursor: pointer;
+}
+
+.input-password figure svg path {
+			fill: #fff
+}
