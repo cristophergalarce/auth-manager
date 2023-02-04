@@ -31,29 +31,29 @@ const Account = ({ session }) => {
     //     return session.user
     // }
 
-    async function getProfile() {
-        try {
-            setLoading(true)
-            const { data: { user } } = await supabase.auth.getUser()
+    // async function getProfile() {
+    //     try {
+    //         setLoading(true)
+    //         const { data: { user } } = await supabase.auth.getUser()
 
-            let { data, error, status } = await supabase
-                .from('profiles')
-                .select('username, website, avatar_url')
-                .eq('id', user.id)
-                .single()
+    //         let { data, error, status } = await supabase
+    //             .from('profiles')
+    //             .select('username, website, avatar_url')
+    //             .eq('id', user.id)
+    //             .single()
         
-            if (data) {
-                setUsername(data.username)
-                setWebsite(data.website)
-                setAvatarUrl(data.avatar_url)
-            }
-        } catch (error) {
-            setError("No pudimos cargar tu perfil. Inténtalo nuevamente.")
-            console.log(error)
-        } finally {
-            setLoading(false)
-        }
-    }
+    //         if (data) {
+    //             setUsername(data.username)
+    //             setWebsite(data.website)
+    //             setAvatarUrl(data.avatar_url)
+    //         }
+    //     } catch (error) {
+    //         setError("No pudimos cargar tu perfil. Inténtalo nuevamente.")
+    //         console.log(error)
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // }
 
     async function updateProfile({ username, website, avatar_url }) {
         try {
