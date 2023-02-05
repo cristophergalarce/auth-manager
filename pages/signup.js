@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { supabase } from '../supabase/supabaseClient'
+import { supabase } from './api/supabaseClient'
 import IconHide from "../public/img/icons/hide.svg"
 import IconShow from "../public/img/icons/show.svg"
 
