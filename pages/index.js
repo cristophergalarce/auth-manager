@@ -1,9 +1,6 @@
 import Head from 'next/head'
 // import { useState, useEffect } from "react"
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-// import { supabase } from '../supabase/supabaseClient'
-import Login from './login'
-import Account from './accountManagement'
+import Link from "next/link"
 // import Image from 'next/image'
 // import { Inter } from '@next/font/google'
 // import styles from '@/styles/Home.module.css'
@@ -12,8 +9,8 @@ import Account from './accountManagement'
 
 export default function Home() {
   // const [isLoading, setIsLoading] = useState(true)
-  const session = useSession()
-  const supabase = useSupabaseClient()
+  // const session = useSession()
+  // const supabase = useSupabaseClient()
 
   // useEffect(() => {
   //   let mounted = true
@@ -59,14 +56,26 @@ export default function Home() {
       </Head>
 
       <div className="container" style={{ padding: '50px 0 100px 0' }}>
-        {!session ? (
-          <Login />
-        ) : (
-          <Account session={session} />
-          // <div>
-          //   Account
-          // </div>
-        )}
+        <Link
+          href="/account"
+        >
+          <button
+            className="button block"
+            type="submit"
+          >
+            Iniciar sesión
+          </button>
+        </Link>
+        <Link
+          href="/signup"
+        >
+          <button
+            className="button block"
+            type="submit"
+          >
+            Crear cuenta
+          </button>
+        </Link>
       </div>
       {/* <main className={styles.main}>
         <div className={styles.description}>

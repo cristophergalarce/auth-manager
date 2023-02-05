@@ -1,6 +1,5 @@
 import { useState } from "react"
-import { supabase } from '../supabase/supabaseClient'
-// import Link from "next/link"
+import { supabase } from '../pages/api/supabaseClient'
 import IconHide from "../public/img/icons/hide.svg"
 import IconShow from "../public/img/icons/show.svg"
 
@@ -67,9 +66,6 @@ const Login = () => {
                     {showPass ? <IconHide /> : <IconShow />}
                 </figure>
             </div>
-            {/* <Link
-                href={"/accountManagement"}
-            > */}
             <button
                 className="button primary block"
                 type="submit"
@@ -78,7 +74,6 @@ const Login = () => {
                 {/* {loading ? 'Loading ...' : 'Ingresar'} */}
                 Iniciar sesión
             </button>
-            {/* </Link> */}
         </form>
     )
 }
