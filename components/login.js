@@ -1,44 +1,41 @@
 import { useState } from "react"
-import { supabase } from './api/supabaseClient'
+import { supabase } from '../pages/api/supabaseClient'
 import IconHide from "../public/img/icons/hide.svg"
 import IconShow from "../public/img/icons/show.svg"
 
-const Signup = () => {
+const Login = () => {
     const [showPass, setShowPass] = useState(false)
-    // const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const [error, setError] = useState("")
 
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
-        await supabase.auth.signUp({
+        await supabase.auth.signInWithPassword({
             email,
             password
         })
-        //     try {
-        //         setLoading(true)
-
-        //         await supabase.auth.signUp({
-        //             email,
-        //             password
-        //         })
-        //     } catch (err) {
-        //         setError(err.message)
-        //     }
-
+        // try {
+        //     setLoading(true)
+        //     const { data, error } = await supabase.auth.signInWithPassword({
+        //         email,
+        //         password
+        //     })
+        //     if (error) throw error
+        // } catch (error) {
+        //     alert('No pudimos iniciar tu sesión. Inténtalo nuevamente.')
+        //     console.log( error.error_description || error.message )
+        // } finally {
+        //     setLoading(false)
+        // }
     }
 
     return (
         <form
             className="form-widget"
-            onSubmit={handleSubmit}
+            onSubmit={handleLogin}
         >
-            <label
-                htmlFor="email"
-            >
-                Email
-            </label>
+            <label htmlFor="email">Email</label>
             <input
                 className="inputField"
                 name="email"
@@ -50,7 +47,7 @@ const Signup = () => {
             <label
                 htmlFor="pass"
             >
-                Crea una contraseña
+                Contraseña
             </label>
             <div
                 className="input-password"
@@ -60,7 +57,7 @@ const Signup = () => {
                     name="pass"
                     type={showPass ? "text" : "password"}
                     value={password}
-                    placeholder="Crea una constraseña para tu cuenta"
+                    placeholder="Ingresa tu constraseña"
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <figure
@@ -72,14 +69,13 @@ const Signup = () => {
             <button
                 className="button primary block"
                 type="submit"
-            // disabled={loading}
+                // disabled={loading}
             >
-                {/* {loading ? 'Crear cuenta' : 'Loading ...'} */}
-                Crear cuenta
+                {/* {loading ? 'Loading ...' : 'Ingresar'} */}
+                Iniciar sesión
             </button>
-            {/* {hintError && <p>{hintError}</p>} */}
         </form>
     )
 }
 
-export default Signup
+export default Login
