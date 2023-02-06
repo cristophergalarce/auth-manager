@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { supabase } from '../pages/api/supabaseClient'
-import { useSupabaseClient } from "@supabase/auth-helpers-react"
+import { useSupabaseClient } from '@supabase/auth-helpers-react'
 
 const Profile = ({ session }) => {
+    const supabase = useSupabaseClient()
     const user = session.user
     const [loading, setLoading] = useState(true)
     const [username, setUsername] = useState(null)
@@ -33,7 +33,7 @@ const Profile = ({ session }) => {
         }
     }
 
-    const updateProfile = async () => {
+    const updateProfile = async ({ username, website }) => {
         try {
             setLoading(true)
 
@@ -55,14 +55,18 @@ const Profile = ({ session }) => {
         }
     }
 
+    const handleLogout = async () => {
+        await supabase.auth.signOut()
+    }
+
     return (
-        <div className="container" style={{ padding: '50px 0 100px 0' }}>
+        <>
             <form
                 className="form-widget"
-                onSubmit={updateProfile}
+                onSubmit={() => updateProfile({ username, website })}
             >
-                Account
-                {/* <div>
+                Perfil
+                <div>
                     <label
                         htmlFor="email"
                     >
@@ -74,13 +78,14 @@ const Profile = ({ session }) => {
                         value={session.user.email}
                         disabled
                     />
-                </div> */}
+                </div>
                 <div>
-                    <label htmlFor="username">Usuario</label>
+                    <label htmlFor="username">Nombre de usuario</label>
                     <input
                         id="username"
                         type="text"
                         value={username || ''}
+                        placeholder="Ejemplo, pepper"
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
@@ -90,6 +95,7 @@ const Profile = ({ session }) => {
                         id="website"
                         type="website"
                         value={website || ''}
+                        placeholder="Ejemplo, stark.com"
                         onChange={(e) => setWebsite(e.target.value)}
                     />
                 </div>
@@ -97,22 +103,20 @@ const Profile = ({ session }) => {
                 <div>
                     <button
                         className="button primary block"
-                        onClick={() => updateProfile({ username, website })}
                         disabled={loading}
                     >
-                        {loading ? 'Loading ...' : 'Update'}
+                        {loading ? 'Guardando ...' : 'Guardar'}
                     </button>
                 </div>
-
-                <button
-                    className="button block"
-                    type="submit"
-                    onClick={() => supabase.auth.signOut()}
-                >
-                    Cerrar sesión
-                </button>
             </form>
-        </div>
+            <button
+                className="button block"
+                type="submit"
+                onClick={handleLogout}
+            >
+                Cerrar sesión
+            </button>
+        </>
     )
 }
 
