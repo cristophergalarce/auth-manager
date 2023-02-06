@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { supabase } from '../pages/api/supabaseClient'
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
 import IconHide from "../public/img/icons/hide.svg"
 import IconShow from "../public/img/icons/show.svg"
 
@@ -8,10 +8,11 @@ const Login = () => {
     // const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const supabase = useSupabaseClient()
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password
         })
