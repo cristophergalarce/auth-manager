@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from "next/link"
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 // import Image from 'next/image'
 // import { Inter } from '@next/font/google'
 // import styles from '@/styles/Home.module.css'
@@ -146,4 +147,27 @@ export default function Home() {
       </main> */}
     </>
   )
+}
+
+// Redirecciona a account si hay sesion
+// https://supabase.com/docs/guides/auth/auth-helpers/nextjs#server-side-rendering-ssr
+export const getServerSideProps = async (ctx) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx)
+  // Check if we have a session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  if (session)
+    return {
+      redirect: {
+        destination: '/account',
+        permanent: false,
+      },
+    }
+
+  return {
+    props: {},
+  }
 }
