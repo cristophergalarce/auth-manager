@@ -1,24 +1,15 @@
-import { useState, useEffect } from "react"
-import { supabase } from "./api/supabaseClient"
 import Login from '../components/login'
 import Profile from "../components/profile"
+import { useSession } from '@supabase/auth-helpers-react'
 
 const Account = () => {
-    const [session, setSession] = useState(null)
-
-    useEffect(() => {
-        setSession(supabase.auth.getSession())
-        supabase.auth.onAuthStateChange((event, session) => {
-            setSession(session),
-            console.log(event, session)
-        })
-    }, [])
+    const session = useSession()
 
     return (
-        <div className="container" style={{ padding: '50px 0 100px 0' }}>
-            {session ? (
-                <Login key={session.user} />
-            ) : (
+        <div className="container" style={{ padding: '300px 300px' }}>
+            {!session ? (
+                <Login />
+                ) : (
                 <Profile
                     session={session}
                 />
