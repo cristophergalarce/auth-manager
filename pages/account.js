@@ -1,23 +1,16 @@
 import { useState, useEffect } from "react"
-import { supabase } from "./api/supabaseClient"
+import { useSession } from "@supabase/auth-helpers-react"
 import Login from '../components/login'
 import Profile from "../components/profile"
 
+// https://supabase.com/docs/guides/getting-started/tutorials/with-nextjs
 const Account = () => {
-    const [session, setSession] = useState(null)
-
-    useEffect(() => {
-        setSession(supabase.auth.getSession())
-        supabase.auth.onAuthStateChange((event, session) => {
-            setSession(session),
-            console.log(event, session)
-        })
-    }, [])
+    const session = useSession()
 
     return (
         <div className="container" style={{ padding: '50px 0 100px 0' }}>
-            {session ? (
-                <Login key={session.user} />
+            {!session ? (
+                <Login/>
             ) : (
                 <Profile
                     session={session}

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { supabase } from '../pages/api/supabaseClient'
+import { useSupabaseClient } from "@supabase/auth-helpers-react"
 
 const Profile = ({ session }) => {
-    const user = supabase.auth.getUser()
+    const user = session.user
     const [loading, setLoading] = useState(true)
     const [username, setUsername] = useState(null)
     const [website, setWebsite] = useState(null)
