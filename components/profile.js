@@ -4,7 +4,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react'
 const Profile = ({ session }) => {
     const supabase = useSupabaseClient()
     const user = session.user
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [username, setUsername] = useState(null)
     const [website, setWebsite] = useState(null)
 
@@ -52,6 +52,7 @@ const Profile = ({ session }) => {
             console.error(error)
         } finally {
             setLoading(false)
+            alert('Perfil actualizado exitosamente.')
         }
     }
 
