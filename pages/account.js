@@ -7,7 +7,7 @@ const Account = () => {
     const session = useSession()
 
     return (
-        <div className="container" style={{ padding: '300px 300px' }}>
+        <div className="contain">
             {!session ? (
                 <Login />
                 ) : (

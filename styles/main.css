@@ -1,0 +1,30 @@
+.input {
+    background: white;
+}
+
+.input-password {
+    position: relative;
+}
+
+.input-password figure {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+}
+
+.input-password figure svg path {
+    fill: #fff
+}
+
+body {
+    background: black;
+    margin: 0 auto;
+}
+
+.container {
+    display: grid;
+    place-content: center;
+    height: 100vh;
+}
