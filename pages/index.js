@@ -19,25 +19,25 @@ export default function Home() {
         <link rel="mask-icon" href="/main.svg" />
       </Head>
 
-      <div className="container" style={{ padding: '300px 300px' }}>
-        <Link
-          href="/account"
-        >
-          <button
-            className="button block"
-            type="submit"
-          >
-            Iniciar sesión
-          </button>
-        </Link>
+      <div className="contain">
         <Link
           href="/signup"
         >
           <button
-            className="button block"
+            className="button button-cta"
             type="submit"
           >
             Crear cuenta
+          </button>
+        </Link>
+        <Link
+          href="/account"
+        >
+          <button
+            className="button button-side"
+            type="submit"
+          >
+            Ya tengo cuenta
           </button>
         </Link>
       </div>
