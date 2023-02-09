@@ -36,39 +36,43 @@ const Login = () => {
                 onSubmit={handleLogin}
             >
                 Inicia sesión
-                <label htmlFor="email">Email</label>
-                <input
-                    className="inputField"
-                    name="email"
-                    type="email"
-                    value={email}
-                    placeholder="Ejemplo, ppotts@stark.com"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <label
-                    htmlFor="pass"
-                >
-                    Contraseña
-                </label>
-                <div
-                    className="input-password"
-                >
+                <div>
+                    <label htmlFor="email">Email</label>
                     <input
-                        className="inputField"
-                        name="pass"
-                        type={showPass ? "text" : "password"}
-                        value={password}
-                        placeholder="Ingresa tu contraseña"
-                        onChange={(e) => setPassword(e.target.value)}
+                        className="input"
+                        name="email"
+                        type="email"
+                        value={email}
+                        placeholder="Ejemplo, ppotts@stark.com"
+                        onChange={(e) => setEmail(e.target.value)}
                     />
-                    <figure
-                        onClick={() => setShowPass(!showPass)}
+                </div>
+                <div>
+                    <label
+                        htmlFor="pass"
                     >
-                        {showPass ? <IconHide /> : <IconShow />}
-                    </figure>
+                        Contraseña
+                    </label>
+                    <div
+                        className="input-password"
+                    >
+                        <input
+                            className="input"
+                            name="pass"
+                            type={showPass ? "text" : "password"}
+                            value={password}
+                            placeholder="Ingresa tu contraseña"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <figure
+                            onClick={() => setShowPass(!showPass)}
+                        >
+                            {showPass ? <IconHide /> : <IconShow />}
+                        </figure>
+                    </div>
                 </div>
                 <button
-                    className="button primary block"
+                    className="button button-cta"
                     type="submit"
                     disabled={loading}
                 >
@@ -79,7 +83,7 @@ const Login = () => {
                 href="/"
             >
                 <button
-                    className="button block"
+                    className="button button-side"
                     type="submit"
                 >
                     Volver al inicio

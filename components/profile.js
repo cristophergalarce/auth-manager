@@ -81,7 +81,11 @@ const Profile = ({ session }) => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="username">Nombre de usuario</label>
+                    <label
+                        htmlFor="username"
+                    >
+                        Nombre de usuario
+                    </label>
                     <input
                         id="username"
                         type="text"
@@ -91,7 +95,11 @@ const Profile = ({ session }) => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="website">Website</label>
+                    <label
+                        htmlFor="website"
+                    >
+                        Website
+                    </label>
                     <input
                         id="website"
                         type="website"
@@ -103,7 +111,7 @@ const Profile = ({ session }) => {
 
                 <div>
                     <button
-                        className="button primary block"
+                        className="button button-cta"
                         disabled={loading}
                     >
                         {loading ? 'Guardando ...' : 'Guardar'}
@@ -111,7 +119,7 @@ const Profile = ({ session }) => {
                 </div>
             </form>
             <button
-                className="button block"
+                className="button"
                 type="submit"
                 onClick={handleLogout}
             >

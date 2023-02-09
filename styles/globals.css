@@ -87,12 +87,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: black;
 }
 
 a {
@@ -104,6 +99,30 @@ a {
   html {
     color-scheme: dark;
   }
+}
+.contain {
+  display: grid;
+  align-content: center;
+  row-gap: 16px;
+  height: 100vh;
+  padding: 0 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* @media (max-width: 400px) {
+  .contain {
+    background-color: red;
+  }
+} */
+
+.form-widget {
+  display: grid;
+  row-gap: 16px;
+}
+
+.input {
+  width: 100%;
 }
 
 .input-password {
@@ -119,5 +138,13 @@ a {
 }
 
 .input-password figure svg path {
-			fill: #fff
+	fill: #fff
+}
+
+.button {
+  width: 100%;
+}
+
+.button-cta {
+  background-color: darkblue;
 }
